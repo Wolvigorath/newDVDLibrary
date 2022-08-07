@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -85,14 +89,73 @@ public class Client
                 tabClient = particularClient.get(g);
                 if (g==0)
                 {
-                    System.out.println(tabClient [0] + " " + tabClient [1] + " " + tabClient[2] + " " + tabClient [3] );
+                    System.out.println(Integer.parseInt(tabClient [0])+1 + " " + tabClient [1] + " " + tabClient[2] + " " + tabClient [3] );
                 }
                 if (g>0)
                 {
-                    System.out.println(" " + " " + tabClient [1] + " " + tabClient[2] + " " + tabClient [3]);
+                    System.out.println( " " + tabClient [1] + " " + tabClient[2] + " " + tabClient [3]);
                 }
 
             }
+        }
+    }
+
+    public static void writeClientDown (String pathName, ArrayList <ArrayList <String []>> listOfClients) throws IOException
+    {
+
+        FileWriter fw = new FileWriter(pathName, true);
+        try {
+            String bufor = null;
+            BufferedReader bufr = new BufferedReader(new FileReader(pathName));
+            bufor = bufr.readLine();
+            if (bufor != null || (bufor != null && !bufor.isEmpty())) {
+                fw.append("\n");
+            }
+            int size = listOfClients.size();
+
+            for (int i = 0; i < size; i++)
+            {
+
+                ArrayList<String[]> particularClient = new ArrayList<String[]>();
+                particularClient = listOfClients.get(i);
+                int partSize = particularClient.size();
+                for (int g = 0; g < partSize; g++) {
+                    String[] tabClient = new String[4];
+                    tabClient = particularClient.get(g);
+                    if (g == 0)
+                    {
+                        fw.write(tabClient[0]);
+                        fw.write(" ");
+                        fw.write(tabClient[1]);
+                        fw.write(" ");
+                        fw.write(tabClient[2]);
+                        fw.write(" ");
+                        fw.write(tabClient[3]);
+                        fw.write("\n");
+
+                    }
+                    if (g > 0)
+                    {
+                        fw.write("  ");
+                        fw.write(" ");
+                        fw.write(tabClient[1]);
+                        fw.write(" ");
+                        fw.write(tabClient[2]);
+                        fw.write(" ");
+                        fw.write(tabClient[3]);
+                        fw.write("\n");
+                    }
+                }
+            }
+        }
+        catch
+        (Exception e)
+        {
+            System.out.println("Się zesrało");
+        }
+        finally {
+
+            fw.close();
         }
     }
 

@@ -17,8 +17,7 @@ import static java.lang.System.out;
 
 public class DVDLib
 {
-    public static void main (String [] args)
-    {
+    public static void main (String [] args) throws IOException {
         Scanner input = new Scanner(System.in);
         ArrayList<String[]> libDVD1 = new ArrayList<String[]>();
         libDVD1 = Reader.read();
@@ -34,13 +33,13 @@ public class DVDLib
         for (; ; )
         {
             out.println("Menu: " + "\n" + "1.Create new client" + "\n" + "2.Add DVD to particular client" + "\n" +
-                    "3.Give back a particular DVD from particular client" + "\n" + "4.Print library's state" + "\n " + "5.Print clients");
+                    "3.Give back a particular DVD from particular client" + "\n" + "4.Print library's state" + "\n" + "5.Print clients"  + "\n" + "6.Write clients down to file");
             String selection = input.nextLine();
             switch (selection)
             {
                 case "1":
                     clientNum = clients.size();
-                    System.out.println("Choose DVD's number to borrow");
+                    out.println("Choose DVD's number to borrow");
                     String newLine = input.nextLine();
                     numberDVD = Integer.parseInt(newLine);
                     clients.add( client1.newClient(clientNum, libDVD1, numberDVD-1 ));
@@ -49,10 +48,10 @@ public class DVDLib
 
                 case "2":
 
-                    System.out.println("Choose client");
+                    out.println("Choose client");
                     newLine = input.nextLine();
                     clientNum = Integer.parseInt(newLine)-1;
-                    System.out.println("Choose DVD's number to borrow");
+                    out.println("Choose DVD's number to borrow");
                     newLine = input.nextLine();
                     numberDVD = Integer.parseInt(newLine)-1;
                     clients.set(clientNum, (ArrayList<String[]>) client1.addToClient(clients.get(clientNum), libDVD1, numberDVD));
@@ -73,8 +72,13 @@ public class DVDLib
                     Client.printClients (clients);
                     break;
 
+                case "6":
+                    Client.writeClientDown ("Clients.txt", clients);
+                    break;
 
 
+                default:
+                    throw new IllegalStateException("Unexpected value: " + selection);
             }
 
         }
