@@ -51,7 +51,7 @@ public class Client
             }
             else
             {
-                System.out.println("brak szukanego filmu");
+               // System.out.println("brak szukanego filmu");
             }
         index = Integer.parseInt(clientTemp[1]);
         }
@@ -70,5 +70,30 @@ public class Client
         return index;
     }
 
+    public static void printClients (ArrayList <ArrayList <String []>> listOfClients)
+    {
+        int size = listOfClients.size();
+
+        for (int i=0; i< size; i++)
+        {
+            ArrayList <String []> particularClient = new ArrayList<String []>();
+            particularClient = listOfClients.get(i);
+            int partSize = particularClient.size();
+            for (int g=0; g<partSize; g++)
+            {
+                String [] tabClient = new String[4];
+                tabClient = particularClient.get(g);
+                if (g==0)
+                {
+                    System.out.println(tabClient [0] + " " + tabClient [1] + " " + tabClient[2] + " " + tabClient [3] );
+                }
+                if (g>0)
+                {
+                    System.out.println(" " + " " + tabClient [1] + " " + tabClient[2] + " " + tabClient [3]);
+                }
+
+            }
+        }
+    }
 
 }

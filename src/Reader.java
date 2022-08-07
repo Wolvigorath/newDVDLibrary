@@ -66,5 +66,16 @@ public class Reader
         return tempPl;
     }
 
+    public static void print (ArrayList <String []> libDVD)
+    {
+        int sizeOfList = libDVD.size();
+        int i;
+        for (i = 0; i< sizeOfList; i++ )
+        {
+            String [] tempArr = new String[3];
+            tempArr = libDVD.get(i);
+            System.out.println(tempArr[0] + "  " + tempArr[1] + "  " + tempArr[2]  );
+        }
+    }
 
 }
